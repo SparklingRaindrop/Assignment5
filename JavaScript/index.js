@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 let pageNumber = 0;
 
 const buttonPrevious = document.querySelector('#previous');
@@ -9,7 +11,7 @@ const footerElement = document.querySelector('footer');
 initialize();
 
 async function initialize(){
-    buttonNext.addEventListener('click', showNextPage);
+    $('#next').on('click', showNextPage);
     buttonPrevious.addEventListener('click', showPreviousPage);
     getCatImages();
 }

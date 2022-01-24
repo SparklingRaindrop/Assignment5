@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cat Exhibition</title>
+  <title>The Great Catsby</title>
   <!-- CSS -->
   <link rel="stylesheet" href="CSS/reset.css">
   <link rel="stylesheet" href="CSS/typography.css">
@@ -19,20 +19,24 @@
 </head>
 <body>
   <main>
-    <h1>Cat Exhibition</h1>
+    <h1>The Great Catsby</h1>
     <nav>
       <button id="buttonPrevious" disabled>previous</button>
       <button id="buttonNext" disabled>next</button>
       <p>Showing page <span class="page-number">0</span></p>
     </nav>
-    <p class="loading hidden"><img src="./assets/icon-loading-spinner.svg" alt="loading"> Loading...</p>
+    <section>
+      <p class="loading hidden"><img src="./assets/icon-loading-spinner.svg" alt="loading"> Loading...</p>
+    </section>
     <div class="images">
     </div>
   </main>
   <footer>
-    <p class="error-message hidden">
-      Something went wrong while fetching data from the server.
-    </p>
+    <div class="error-message hidden">
+      <p>
+        <img src="./assets/icon-warning.svg" alt="warning"> Something went wrong while fetching data from the server.
+      </p>
+    </div>
   </footer>
 </body>
 </html>

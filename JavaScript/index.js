@@ -19,13 +19,12 @@ function initialize(){
             $('#buttonPrevious').prop('disabled', false);
         }
     });
-    
+
     getCatImages();
     $('#buttonNext').on('click', showNextPage);
     $('#buttonPrevious').on('click', showPreviousPage);
 }
 async function getCatImages(){
-
     $.ajax({
         url: `https://api.thecatapi.com/v1/images/search?limit=12&page=${pageNumber}&order=asc`,
         datatype: 'json',

@@ -1,6 +1,12 @@
 .error-message {
-  background-color: crimson;
+  background: rgb(247, 191, 191);
 }
 main {
   background-color: rgba(255, 255, 255, 0.8);
+}
+button {
+  background: rgba(172, 207, 223, 0.8);
+}
+button:not(button:disabled):hover {
+  background: rgb(129, 192, 221);
 }

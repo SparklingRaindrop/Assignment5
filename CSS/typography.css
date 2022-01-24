@@ -1,0 +1,9 @@
+h1 {
+  font-family: 'Luxurious Roman', cursive;
+}
+button,
+p {
+  font-family: 'Heebo', sans-serif;
+  text-transform: capitalize;
+  font-size: 1.2rem;
+}

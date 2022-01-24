@@ -2,58 +2,65 @@ import $ from "jquery";
 
 let pageNumber = 0;
 
-const buttonPrevious = document.querySelector('#previous');
-const buttonNext = document.querySelector('#next');
-const imagesWrapperElement = document.querySelector('.images');
-const pageNumberElement = document.querySelector('.page-number');
-const footerElement = document.querySelector('footer');
-
 initialize();
 
-async function initialize(){
-    $('#next').on('click', showNextPage);
-    buttonPrevious.addEventListener('click', showPreviousPage);
+function initialize(){
+    $('#buttonNext').on('click', showNextPage);
+    $('#buttonPrevious').on('click', showPreviousPage);
     getCatImages();
 }
 async function getCatImages(){
-    try {
-        let response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=12&page=${pageNumber}&order=asc`,{
-            headers: {
-                'x-api-key': '6e935493-01c9-4333-8ffb-0b624ebfe3bc',
-            }
-        });
-        const data = await response.json();
+    $( document ).ajaxStart(() => {
+        $( ".loading" ).show();
+        $('#buttonPrevious').prop('disabled', true);
+        $('#buttonNext').prop('disabled', true);
+    });
+    $( document ).ajaxStop(() => {
+        $( ".loading" ).hide();
+        $('#buttonPrevious').prop('disabled', false);
+        $('#buttonNext').prop('disabled', false);
+    });
+    $.ajax({
+        url: `https://api.thecatapi.com/v1/images/search?limit=12&page=${pageNumber}&order=asc`,
+        datatype: 'json',
+        headers: {
+            'x-api-key': '6e935493-01c9-4333-8ffb-0b624ebfe3bc',
+        },
+        error: () => {
+            $('.error-message').slideToggle('slow', 'swing', () => {
+                setTimeout(() => {
+                    $('.error-message').slideToggle('slow');
+                }, 3000);
+            });
+        },
+    }).done((data) => {
         for (const item of data){
-            const img = document.createElement('img');
-            img.classList.add('image');
-            img.src = item.url;
-            imagesWrapperElement.append(img);
+            $('<img>', {
+                'class': 'image',
+                'src': item.url,
+            }).appendTo($('.images'));
         }
-    } catch (error){
-        const errorMessageElement = document.createElement('div');
-        errorMessageElement.textContent = 'Something went wrong while fetching data from the server';
-        footerElement.append(errorMessageElement);
-    }
-
+    });
 }
+
 function updatePageNumber(){
-    pageNumberElement.textContent = pageNumber;
+    $('.page-number').text(pageNumber);
 }
 function showNextPage(){
-    imagesWrapperElement.textContent = '';
+    $('.images').empty();
     pageNumber++;
+    getCatImages();
     if(pageNumber === 1){
-        buttonPrevious.disabled = false;
+        $('#buttonPrevious').prop('disabled', false);
     }
     updatePageNumber();
-    getCatImages();
 }
 function showPreviousPage(){
-    imagesWrapperElement.textContent = '';
+    $('.images').empty();
     pageNumber--;
+    getCatImages();
     if(pageNumber === 0){
-        buttonPrevious.disabled = true;
+        $('#buttonPrevious').prop('disabled', true);
     }
     updatePageNumber();
-    getCatImages();
 }

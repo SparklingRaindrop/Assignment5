@@ -5,11 +5,6 @@ let pageNumber = 0;
 initialize();
 
 function initialize(){
-    $('#buttonNext').on('click', showNextPage);
-    $('#buttonPrevious').on('click', showPreviousPage);
-    getCatImages();
-}
-async function getCatImages(){
     $( document ).ajaxStart(() => {
         $( ".loading" ).show();
         $('#buttonPrevious').prop('disabled', true);
@@ -17,9 +12,20 @@ async function getCatImages(){
     });
     $( document ).ajaxStop(() => {
         $( ".loading" ).hide();
-        $('#buttonPrevious').prop('disabled', false);
         $('#buttonNext').prop('disabled', false);
+        if(pageNumber === 0){
+            $('#buttonPrevious').prop('disabled', true);
+        } else {
+            $('#buttonPrevious').prop('disabled', false);
+        }
     });
+    
+    getCatImages();
+    $('#buttonNext').on('click', showNextPage);
+    $('#buttonPrevious').on('click', showPreviousPage);
+}
+async function getCatImages(){
+
     $.ajax({
         url: `https://api.thecatapi.com/v1/images/search?limit=12&page=${pageNumber}&order=asc`,
         datatype: 'json',
@@ -50,17 +56,12 @@ function showNextPage(){
     $('.images').empty();
     pageNumber++;
     getCatImages();
-    if(pageNumber === 1){
-        $('#buttonPrevious').prop('disabled', false);
-    }
     updatePageNumber();
 }
 function showPreviousPage(){
     $('.images').empty();
     pageNumber--;
     getCatImages();
-    if(pageNumber === 0){
-        $('#buttonPrevious').prop('disabled', true);
-    }
+
     updatePageNumber();
 }

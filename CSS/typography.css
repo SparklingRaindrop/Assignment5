@@ -5,5 +5,10 @@ button,
 p {
   font-family: 'Heebo', sans-serif;
   text-transform: capitalize;
+}
+button {
   font-size: 1.2rem;
+}
+p {
+  font-size: 1rem;
 }

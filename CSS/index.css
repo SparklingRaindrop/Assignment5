@@ -76,17 +76,17 @@ footer {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 1rem;
 }
 .error-message {
   width: 100%;
-  height: auto;
+  padding: 1em;
+  margin: 0;
   border-left: 9px solid rgb(247, 43, 43);
 }
 .error-message p {
   min-height: 100%;
   padding-left: 1rem;
-  transform: translateY(50%);
 }
 .error-message img {
   width: 1rem;

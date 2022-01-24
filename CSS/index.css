@@ -1,17 +1,18 @@
 
 :root {
-  --element-margin-gap-size: 1rem;
+  --element-margin-and-gap-size: 1rem;
+  --inner-elements-margin: 1rem;
 }
 
 body {
-  background: url('../assets/index-background.svg');
   min-height: 100vh;
+  background: url('../assets/index-background.svg');
 }
 main {
   max-width: 80vw;
   min-height: 100vh;
   margin: 0 auto;
-  padding: 5rem 0;
+  padding: 5rem var(--inner-elements-margin);
 }
 h1 {
   text-align: center;
@@ -19,22 +20,31 @@ h1 {
 
 /* Navigation */
 nav {
-  margin: 1rem;
+  margin: var(--element-margin-and-gap-size) 0;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr auto auto 1fr;
   grid-template-rows: 1fr 0.5fr;
-  gap: var(--element-margin-gap-size);
+  gap: var(--element-margin-and-gap-size);
   justify-content: center;
 }
 button {
   padding: 0.3rem 1rem;
-  border-radius: 0.2em;
+  border-radius: 0.3em;
+  border: 1px solid rgba(40, 44, 44, 0.5);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
   transition: all 0.5s ease-out;
 }
-nav > p {
-  grid-column: 1 / span 2;
+button#buttonPrevious {
+  grid-column: 2 /span 1;
+}
+button#buttonNext {
+  grid-column: 3 /span 1;
+}
+.page-index {
+  padding-left: 1rem;
+  grid-column: 2 / span 2;
   grid-row: 2 / span 1;
-  justify-self: left;
+  justify-self: center;
 }
 button:disabled {
   cursor: not-allowed;
@@ -44,8 +54,8 @@ button:disabled {
 .images {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(5rem, 15rem)); 
-  gap: var(--element-margin-gap-size);
+  grid-template-columns: repeat(auto-fit, minmax( 5rem, 15rem)); 
+  gap: var(--element-margin-and-gap-size);
   justify-content: center;
 }
 .image {

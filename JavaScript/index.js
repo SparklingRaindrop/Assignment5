@@ -1,16 +1,15 @@
 import $ from "jquery";
 
 let pageNumber = 0;
-
 initialize();
 
 function initialize(){
-    $( document ).ajaxStart(() => {
+    $(document).ajaxStart(() => {
         $( ".loading" ).show();
         $('#buttonPrevious').prop('disabled', true);
         $('#buttonNext').prop('disabled', true);
     });
-    $( document ).ajaxStop(() => {
+    $(document).ajaxStop(() => {
         $( ".loading" ).hide();
         $('#buttonNext').prop('disabled', false);
         if(pageNumber === 0){
@@ -24,6 +23,7 @@ function initialize(){
     $('#buttonNext').on('click', showNextPage);
     $('#buttonPrevious').on('click', showPreviousPage);
 }
+
 async function getCatImages(){
     $.ajax({
         url: `https://api.thecatapi.com/v1/images/search?limit=12&page=${pageNumber}&order=asc`,
@@ -51,16 +51,17 @@ async function getCatImages(){
 function updatePageNumber(){
     $('.page-number').text(pageNumber);
 }
+
 function showNextPage(){
     $('.images').empty();
     pageNumber++;
     getCatImages();
     updatePageNumber();
 }
+
 function showPreviousPage(){
     $('.images').empty();
     pageNumber--;
     getCatImages();
-
     updatePageNumber();
 }

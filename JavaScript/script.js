@@ -6,15 +6,15 @@ initialize();
 function initialize(){
     $(document).ajaxStart(() => {
         $( ".loading" ).show();
+
         $('#buttonPrevious').prop('disabled', true);
         $('#buttonNext').prop('disabled', true);
     });
     $(document).ajaxStop(() => {
         $( ".loading" ).hide();
+
         $('#buttonNext').prop('disabled', false);
-        if(pageNumber === 0){
-            $('#buttonPrevious').prop('disabled', true);
-        } else {
+        if(pageNumber > 0){
             $('#buttonPrevious').prop('disabled', false);
         }
     });

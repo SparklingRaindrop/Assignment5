@@ -1,6 +1,6 @@
 import $ from "jquery";
 
-let pageNumber = 0;
+let currentPage = 0;
 initialize();
 
 function initialize(){
@@ -14,7 +14,7 @@ function initialize(){
         $( ".loading" ).hide();
 
         $('#buttonNext').prop('disabled', false);
-        if(pageNumber > 0){
+        if(currentPage > 0){
             $('#buttonPrevious').prop('disabled', false);
         }
     });
@@ -26,7 +26,7 @@ function initialize(){
 
 async function getCatImages(){
     $.ajax({
-        url: `https://api.thecatapi.com/v1/images/search?limit=12&page=${pageNumber}&order=asc`,
+        url: `https://api.thecatapi.com/v1/images/search?limit=12&page=${currentPage}&order=asc`,
         datatype: 'json',
         headers: {
             'x-api-key': '6e935493-01c9-4333-8ffb-0b624ebfe3bc',
@@ -48,20 +48,20 @@ async function getCatImages(){
     });
 }
 
-function updatePageNumber(){
-    $('.page-number').text(pageNumber);
+function updatecurrentPage(){
+    $('.page-number').text(currentPage);
 }
 
 function showNextPage(){
     $('.images').empty();
-    pageNumber++;
+    currentPage++;
     getCatImages();
-    updatePageNumber();
+    updatecurrentPage();
 }
 
 function showPreviousPage(){
     $('.images').empty();
-    pageNumber--;
+    currentPage--;
     getCatImages();
-    updatePageNumber();
+    updatecurrentPage();
 }

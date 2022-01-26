@@ -48,20 +48,20 @@ async function getCatImages(){
     });
 }
 
-function updatecurrentPage(){
-    $('.page-number').text(currentPage);
+function updateCurrentPage(){
+    $('.current-page').text(currentPage);
 }
 
 function showNextPage(){
     $('.images').empty();
     currentPage++;
     getCatImages();
-    updatecurrentPage();
+    updateCurrentPage();
 }
 
 function showPreviousPage(){
     $('.images').empty();
     currentPage--;
     getCatImages();
-    updatecurrentPage();
+    updateCurrentPage();
 }
